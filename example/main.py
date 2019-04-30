@@ -3,6 +3,8 @@ from __future__ import print_function, absolute_import
 import os
 import argparse
 import time
+import matplotlib as mpl
+mpl.use('Agg')
 import matplotlib.pyplot as plt
 
 import torch
@@ -94,6 +96,7 @@ def main(args):
     if args.resume:
         if isfile(args.resume):
             print("=> loading checkpoint '{}'".format(args.resume))
+            
             checkpoint = torch.load(args.resume)
             args.start_epoch = checkpoint['epoch']
             best_acc = checkpoint['best_acc']

@@ -1,0 +1,64 @@
+==> creating model 'hg_mbn_e4', stacks=2, blocks=1
+    Total params: 16.12M
+    Mean: 0.4404, 0.4440, 0.4327
+    Std:  0.2458, 0.2410, 0.2468
+
+Epoch: 1 | LR: 0.00050000
+Traceback (most recent call last):
+  File "example/main.py", line 434, in <module>
+    main(parser.parse_args())
+  File "example/main.py", line 154, in main
+    args.debug, args.flip)
+  File "example/main.py", line 232, in train
+    loss.backward()
+  File "/usr/local/python3.7/lib/python3.7/site-packages/torch/tensor.py", line 102, in backward
+    torch.autograd.backward(self, gradient, retain_graph, create_graph)
+  File "/usr/local/python3.7/lib/python3.7/site-packages/torch/autograd/__init__.py", line 90, in backward
+    allow_unreachable=True)  # allow_unreachable flag
+  File "/usr/local/python3.7/lib/python3.7/site-packages/torch/utils/data/dataloader.py", line 274, in handler
+    _error_if_any_worker_fails()
+RuntimeError: DataLoader worker (pid 25249) is killed by signal: Killed. 
+==> creating model 'hg_mbn_e4', stacks=2, blocks=1
+    Total params: 16.12M
+    Mean: 0.4404, 0.4440, 0.4327
+    Std:  0.2458, 0.2410, 0.2468
+
+Epoch: 1 | LR: 0.00050000
+Traceback (most recent call last):
+  File "example/main.py", line 434, in <module>
+    main(parser.parse_args())
+  File "example/main.py", line 154, in main
+    args.debug, args.flip)
+  File "example/main.py", line 192, in train
+    for i, (input, target, meta) in enumerate(train_loader):
+  File "/usr/local/python3.7/lib/python3.7/site-packages/torch/utils/data/dataloader.py", line 631, in __next__
+    idx, batch = self._get_batch()
+  File "/usr/local/python3.7/lib/python3.7/site-packages/torch/utils/data/dataloader.py", line 601, in _get_batch
+    return self.data_queue.get(timeout=MP_STATUS_CHECK_INTERVAL)
+  File "/usr/local/python3.7/lib/python3.7/queue.py", line 179, in get
+    self.not_empty.wait(remaining)
+  File "/usr/local/python3.7/lib/python3.7/threading.py", line 300, in wait
+    gotit = waiter.acquire(True, timeout)
+  File "/usr/local/python3.7/lib/python3.7/site-packages/torch/utils/data/dataloader.py", line 274, in handler
+    _error_if_any_worker_fails()
+RuntimeError: DataLoader worker (pid 25370) is killed by signal: Killed. 
+==> creating model 'hg_mbn_e4', stacks=2, blocks=1
+    Total params: 16.12M
+    Mean: 0.4404, 0.4440, 0.4327
+    Std:  0.2458, 0.2410, 0.2468
+
+Epoch: 1 | LR: 0.00050000
+
+Epoch: 2 | LR: 0.00050000
+
+Epoch: 3 | LR: 0.00050000
+
+Epoch: 4 | LR: 0.00050000
+
+Epoch: 5 | LR: 0.00050000
+
+Epoch: 6 | LR: 0.00050000
+
+Epoch: 7 | LR: 0.00050000
+
+Epoch: 8 | LR: 0.00050000

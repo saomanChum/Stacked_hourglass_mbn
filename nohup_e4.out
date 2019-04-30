@@ -1,0 +1,39 @@
+==> creating model 'hg_mbn_e4', stacks=2, blocks=1
+=> no checkpoint found at 'checkpoint/mpii/hg_mbn_s2_b1_e4/model_best.pth.tar'
+    Total params: 16.12M
+    Mean: 0.4404, 0.4440, 0.4327
+    Std:  0.2458, 0.2410, 0.2468
+
+Epoch: 1 | LR: 0.00025000
+==> creating model 'hg_mbn_e4', stacks=2, blocks=1
+=> no checkpoint found at 'checkpoint/mpii/hg_mbn_s2_b1_e4/model_best.pth.tar'
+    Total params: 16.12M
+    Mean: 0.4404, 0.4440, 0.4327
+    Std:  0.2458, 0.2410, 0.2468
+
+Epoch: 1 | LR: 0.00025000
+==> creating model 'hg_mbn_e4', stacks=2, blocks=1
+=> no checkpoint found at 'checkpoint/mpii/hg_mbn_s2_b1_e4/model_best.pth.tar'
+    Total params: 16.12M
+    Mean: 0.4404, 0.4440, 0.4327
+    Std:  0.2458, 0.2410, 0.2468
+
+Epoch: 1 | LR: 0.00025000
+Traceback (most recent call last):
+  File "example/main.py", line 434, in <module>
+    main(parser.parse_args())
+  File "example/main.py", line 161, in main
+    logger.append([epoch + 1, lr, train_loss, valid_loss, train_acc, valid_acc])
+UnboundLocalError: local variable 'logger' referenced before assignment
+==> creating model 'hg_mbn_e4', stacks=2, blocks=1
+    Total params: 16.12M
+    Mean: 0.4404, 0.4440, 0.4327
+    Std:  0.2458, 0.2410, 0.2468
+
+Epoch: 1 | LR: 0.00025000
+
+Epoch: 2 | LR: 0.00025000
+
+Epoch: 3 | LR: 0.00025000
+
+Epoch: 4 | LR: 0.00025000

@@ -9,15 +9,39 @@ import torch.nn.functional as F
 # from .preresnet import BasicBlock, Bottleneck
 
 
-__all__ = ['HourglassNet', 'hg']
+__all__ = ['hg_mbn_e6']
 
 class Bottleneck(nn.Module):
-
     expansion = 2
-
-    def __init__(self, inplanes, planes, stride=1, downsample=None):
+    def __init__(self, inplanes, out_planes, stride=1, downsample=None):
         super(Bottleneck, self).__init__()
+        # mobilenet_block
 
+        super(Bottleneck, self).__init__()
+        self.stride = stride
+        planes = 6 * inplanes
+        self.conv1 = nn.Conv2d(inplanes, planes, kernel_size=1,
+                               stride=1, padding=0, bias=False)
+        self.bn1 = nn.BatchNorm2d(planes)
+        self.conv2 = nn.Conv2d(planes, planes, kernel_size=3,
+                               stride=stride, padding=1, groups=planes,
+                               bias=False)
+        self.bn2 = nn.BatchNorm2d(planes)
+        self.conv3 = nn.Conv2d(planes, out_planes*2, kernel_size=1,
+                               stride=1, bias=False)
+        self.bn3 = nn.BatchNorm2d(out_planes*2)
+        self.relu = nn.ReLU(inplace=True)
+        '''
+        if stride == 1 and inplanes != out_planes:
+            self.shortcut = nn.Sequential(
+                nn.Conv2d(inplanes, out_planes, kernel_size=1,
+                          stride=1, padding=0, bias=False),
+                nn.BatchNorm2d(out_planes),
+            )
+        '''
+        self.downsample = downsample
+        self.stride = stride
+        """
         self.bn1 = nn.BatchNorm2d(inplanes)
         self.conv1 = nn.Conv2d(inplanes, planes, kernel_size=1, bias=True)
         self.bn2 = nn.BatchNorm2d(planes)
@@ -25,11 +49,33 @@ class Bottleneck(nn.Module):
                                padding=1, bias=True)
         self.bn3 = nn.BatchNorm2d(planes)
         self.conv3 = nn.Conv2d(planes, planes * 2, kernel_size=1, bias=True)
-        self.relu = nn.ReLU(inplace=True)
-        self.downsample = downsample
-        self.stride = stride
+        
+        
+        
+    """
 
     def forward(self, x):
+        residual = x
+
+        out = self.conv1(x)
+        out = self.bn1(out)
+        out = self.relu(out)
+
+        out = self.conv2(out)
+        out = self.bn2(out)
+        out = self.relu(out)
+
+        out = self.conv3(out)
+        out = self.bn3(out)
+
+
+        if self.downsample is not None:
+            residual = self.downsample(x)
+
+        out += residual if self.stride == 1 else out
+        return out
+
+    '''
         residual = x
 
         out = self.bn1(x)
@@ -44,13 +90,10 @@ class Bottleneck(nn.Module):
         out = self.relu(out)
         out = self.conv3(out)
 
-        if self.downsample is not None:
-            residual = self.downsample(x)
-
-        out += residual
+        
 
         return out
-
+'''
 
 class Hourglass(nn.Module):
     def __init__(self, block, num_blocks, planes, depth):
@@ -163,7 +206,7 @@ class HourglassNet(nn.Module):
         x = self.layer1(x)
         x = self.maxpool(x)
         x = self.layer2(x)
-        x = self.layer3(x)
+        # x = self.layer3(x)
 
         for i in range(self.num_stacks):
             y = self.hg[i](x)
@@ -179,7 +222,7 @@ class HourglassNet(nn.Module):
         return out
 
 
-def hg(**kwargs):
+def hg_mbn_e6(**kwargs):
     model = HourglassNet(Bottleneck, num_stacks=kwargs['num_stacks'], num_blocks=kwargs['num_blocks'],
                          num_classes=kwargs['num_classes'])
     return model
